@@ -20,16 +20,14 @@ namespace WebBanSach.Controllers
         // Action Index này sẽ gửi TẤT CẢ sách ra View
         public async Task<IActionResult> Index()
         {
-            // Lấy TẤT CẢ sách (không phân trang)
-            // Sắp xếp theo ID giảm dần (để sách mới nhất lên đầu)
             var allBooks = await _context.Books
                                 .AsNoTracking()
                                 .OrderByDescending(b => b.Id)
                                 .ToListAsync();
-
-            // Gửi toàn bộ danh sách ra View
             return View(allBooks);
         }
+
+        // === ACTION TÌM KIẾM (ĐÃ GIỮ LẠI) ===
         [HttpGet]
         public async Task<IActionResult> Search([FromQuery] string query)
         {
@@ -41,7 +39,6 @@ namespace WebBanSach.Controllers
             // 2. Kiểm tra nếu query không rỗng
             if (!string.IsNullOrEmpty(query))
             {
-                // Logic tìm kiếm (tương tự file BooksApiController của bạn)
                 var lowerQuery = query.ToLower();
                 queryableBooks = queryableBooks.Where(b =>
                     b.Title.ToLower().Contains(lowerQuery) ||
@@ -55,9 +52,67 @@ namespace WebBanSach.Controllers
                             .OrderByDescending(b => b.Id)
                             .ToListAsync();
 
-            // 4. Trả về View "Search.cshtml" (sẽ tạo ở Bước 2)
+            // 4. Trả về View "Search.cshtml"
             return View(books);
         }
+
+        // === 8 ACTION MỚI CHO SÁCH, BANNER VÀ ICON ===
+
+        // 1. ACTION CHO TRANG CHI TIẾT SÁCH
+        public async Task<IActionResult> Details(int id)
+        {
+            var book = await _context.Books
+                .FirstOrDefaultAsync(b => b.Id == id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+            return View(book);
+        }
+
+        // 2. ACTION CHO BANNER "SALE 11.11"
+        public IActionResult Sale()
+        {
+            return View();
+        }
+
+        // 3. ACTION CHO BANNER SÁCH MỚI (TRONG CAROUSEL)
+        public IActionResult BannerSachMoi()
+        {
+            return View();
+        }
+
+        // 4. ACTION CHO BANNER SIDEBAR 1 (CHIẾN THẦN NGỮ VĂN)
+        public IActionResult BannerNguVan()
+        {
+            return View();
+        }
+
+        // 5. ACTION CHO BANNER SIDEBAR 2 (OXFORD)
+        public IActionResult BannerOxford()
+        {
+            return View();
+        }
+
+        // 6. ACTION CHO ICON FLASH SALE
+        public IActionResult FlashSale()
+        {
+            return View();
+        }
+
+        // 7. ACTION CHO ICON MANGA
+        public IActionResult Manga()
+        {
+            return View();
+        }
+
+        // 8. ACTION CHO ICON QUÀ TẶNG
+        public IActionResult QuaTang()
+        {
+            return View();
+        }
+
+        // === CÁC ACTION CÓ SẴN KHÁC ===
         public IActionResult Privacy()
         {
             return View();
@@ -70,4 +125,3 @@ namespace WebBanSach.Controllers
         }
     }
 }
-

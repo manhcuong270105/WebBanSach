@@ -1,33 +1,40 @@
 ﻿<Properties StartupConfiguration="{1EE288B3-3C81-4167-A9F2-7337086A825F}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/AdminController.cs">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Views/Home/Details.cshtml">
     <Files>
       <File FileName="Program.cs" />
-      <File FileName="Migrations/20251102112532_SeedData.cs" Line="72" Column="2" />
-      <File FileName="Controllers/AdminController.cs" Line="23" Column="1" />
-      <File FileName="Views/Admin/Index.cshtml" Line="1" Column="1" />
-      <File FileName="Views/Home/Index.cshtml" />
-      <File FileName="Migrations/20251102112122_SeedBooks.cs" Line="1" Column="1" />
-      <File FileName="Migrations/20251102015614_AddOrderTables.cs" Line="1" Column="1" />
-      <File FileName="Migrations/20251101185258_AddUserTable.cs" Line="1" Column="1" />
-      <File FileName="Migrations/20251101145226_InitialCreate.cs" Line="1" Column="1" />
+      <File FileName="Migrations/20251102112532_SeedData.cs" />
+      <File FileName="Controllers/AdminController.cs" Line="30" Column="57" />
+      <File FileName="Views/Admin/Index.cshtml" />
+      <File FileName="Views/Home/Index.cshtml" Line="299" Column="2" />
+      <File FileName="Migrations/20251102112122_SeedBooks.cs" />
+      <File FileName="Migrations/20251102015614_AddOrderTables.cs" />
+      <File FileName="Migrations/20251101185258_AddUserTable.cs" />
+      <File FileName="Migrations/20251101145226_InitialCreate.cs" />
+      <File FileName="Controllers/HomeController.cs" Line="127" Column="2" />
+      <File FileName="Views/Home/Details.cshtml" Line="32" Column="7" />
+      <File FileName="Views/Home/Sale.cshtml" Line="7" Column="7" />
+      <File FileName="Views/Home/BannerSachMoi.cshtml" Line="7" Column="7" />
+      <File FileName="Views/Home/BannerNguVan.cshtml" Line="7" Column="7" />
+      <File FileName="Views/Home/BannerOxford.cshtml" Line="10" Column="7" />
+      <File FileName="Views/Home/FlashSale.cshtml" Line="7" Column="7" />
+      <File FileName="Views/Home/Manga.cshtml" Line="7" Column="7" />
+      <File FileName="Views/Home/QuaTang.cshtml" Line="7" Column="7" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="WebBanSach" expanded="True">
+          <Node name="WebBanSach">
             <Node name="WebBanSach" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="AdminController.cs" selected="True" />
-              </Node>
+              <Node name="Controllers" expanded="True" />
               <Node name="Migrations" expanded="True" />
               <Node name="Views" expanded="True">
                 <Node name="Account" expanded="True" />
                 <Node name="Admin" expanded="True" />
-                <Node name="Home" expanded="True" />
-              </Node>
-              <Node name="wwwroot" expanded="True">
-                <Node name="images" expanded="True">
-                  <Node name="books" expanded="True" />
+                <Node name="Home" expanded="True">
+                  <Node name="Details.cshtml" selected="True" />
                 </Node>
               </Node>
             </Node>
@@ -36,11 +43,8 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.WebBanSach PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.WebBanSach PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
 </Properties>

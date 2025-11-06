@@ -1,0 +1,32 @@
+﻿@model WebBanSach.Models.Book
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="@(string.IsNullOrEmpty(Model.ImageUrl) ? "~/images/books/book_placeholder.png" : Model.ImageUrl)"
+                 class="img-fluid rounded shadow-sm" alt="@Model.Title">
+        </div>
+
+        <div class="col-md-8">
+            <h1 class="display-5">@Model.Title</h1>
+            <h4 class="text-muted">Tác giả: @Model.Author</h4>
+
+            <hr>
+
+            <h3 class="text-danger my-3">@Model.Price.ToString("N0") VNĐ</h3>
+
+            <form asp-controller="Cart" asp-action="AddToCart" method="post" class="mt-auto">
+                <input type="hidden" name="id" value="@Model.Id" />
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="bi bi-cart-plus"></i> Thêm vào giỏ
+                </button>
+            </form>
+
+            <hr>
+
+        </div>
+    </div>
+</div>
