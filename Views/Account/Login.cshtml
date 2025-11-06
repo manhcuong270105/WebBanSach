@@ -1,0 +1,76 @@
+﻿@model WebBanSach.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Đăng nhập";
+}
+
+<!-- Style để ép nền tối cho trang này -->
+<style>
+    body {
+        background-color: #2c1a1a;
+    }
+    /* Ẩn Header và Footer mặc định nếu muốn */
+    /*
+    header { display: none; }
+    footer { display: none; }
+    */
+</style>
+
+<div class="login-page-container">
+    <div class="login-form-wrapper">
+        <section>
+            <!-- Sửa form để post về Account/Login -->
+            <form method="post" asp-controller="Account" asp-action="Login">
+                <h2 class="login-title">Sign In Or Create An Account</h2>
+
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                <!-- Sửa asp-for="Input.Email" thành asp-for="Username" -->
+                <div class="form-floating mb-3">
+                    <input asp-for="Username" class="form-control login-input" autocomplete="username" aria-required="true" placeholder="Username" />
+                    <label asp-for="Username" class="form-label login-label">Username</label>
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+
+                <!-- Sửa asp-for="Input.Password" thành asp-for="Password" -->
+                <div class="form-floating mb-3">
+                    <input asp-for="Password" class="form-control login-input" autocomplete="current-password" aria-required="true" placeholder="Password" />
+                    <label asp-for="Password" class="form-label login-label">Password</label>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <!-- Sửa asp-for="Input.RememberMe" thành asp-for="RememberMe" -->
+                <div class="checkbox-wrapper mb-3">
+                    <label asp-for="RememberMe" class="form-label">
+                        <input class="form-check-input" asp-for="RememberMe" />
+                        @Html.DisplayNameFor(m => m.RememberMe)
+                    </label>
+                </div>
+
+                <div>
+                    <button id="login-submit" type="submit" class="w-100 btn btn-lg login-button">Sign In</button>
+                </div>
+
+                <div class="links-section">
+                    <p>
+                        <a href="#" class="forgot-link">Forgot your password?</a>
+                    </p>
+                    <p>
+                        <!-- Sửa link Đăng ký (nếu bạn tạo sau) -->
+                        <a asp-action="Register" class="forgot-link">Register as a new user</a>
+                    </p>
+                </div>
+            </form>
+        </section>
+
+        <div class="join-coffee-house-section">
+            <p>Join Webansach to earn free books, get free refills, pay and order with your phone, and more.</p>
+            <a href="#" class="btn btn-secondary join-now-button">Join now</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+```

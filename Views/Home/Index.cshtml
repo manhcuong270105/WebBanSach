@@ -1,0 +1,298 @@
+﻿@model IEnumerable<WebBanSach.Models.Book>
+@{
+    ViewData["Title"] = "Trang chủ";
+
+    // Lấy thông tin phân trang (nếu có) từ ViewData
+    int currentPage = ViewData["CurrentPage"] as int? ?? 1;
+    int totalPages = ViewData["TotalPages"] as int? ?? 1;
+}
+
+<div class="row g-3 mb-4">
+
+    <!-- Vùng Carousel và Banner quảng cáo -->
+    <div class="col-lg-8">
+        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="~/images/banners/banner-sale-11-11.png" class="d-block w-100 carousel-banner-img" alt="Banner Sale 11-11">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/images/banners/banner-sach-moi.png" class="d-block w-100 carousel-banner-img" alt="Banner Sách Mới">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="col-lg-4 d-flex flex-column gap-3">
+        <div>
+            <img src="~/images/banners/ad-sidebar-1.png" class="img-fluid w-100 sidebar-ad-img" alt="Quảng cáo 1">
+        </div>
+        <div>
+            <img src="~/images/banners/ad-sidebar-2.png" class="img-fluid w-100 sidebar-ad-img" alt="Quảng cáo 2">
+        </div>
+    </div>
+</div>
+
+<!-- Vùng icon danh mục nhanh -->
+<div class="container mb-4 category-icon-grid">
+    <div class="row g-3 text-center justify-content-center">
+        <div class="col-4 col-md-2 col-lg-1">
+            <a href="#" class="text-decoration-none text-dark">
+                <img src="~/images/icons/icon-flash-sale.png" class="img-fluid category-icon-img" alt="Flash Sale">
+                <span class="d-block" style="font-size: 0.8rem;">Flash Sale</span>
+            </a>
+        </div>
+        <div class="col-4 col-md-2 col-lg-1">
+            <a href="#" class="text-decoration-none text-dark">
+                <img src="~/images/icons/icon-manga.png" class="img-fluid category-icon-img" alt="Manga">
+                <span class="d-block" style="font-size: 0.8rem;">Manga</span>
+            </a>
+        </div>
+        <div class="col-4 col-md-2 col-lg-1">
+            <a href="#" class="text-decoration-none text-dark">
+                <img src="~/images/icons/icon-qua-tang.png" class="img-fluid category-icon-img" alt="Quà tặng">
+                <span class="d-block" style="font-size: 0.8rem;">Quà tặng</span>
+            </a>
+        </div>
+        <!-- Bạn có thể thêm các icon danh mục khác ở đây -->
+    </div>
+</div>
+
+<!-- === PHẦN GỢI Ý HÔM NAY (LAYOUT LƯỚI 6 CỘT) === -->
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="text-uppercase fw-bold text-danger mb-0">GỢI Ý HÔM NAY</h4>
+        <a href="#" class="btn btn-outline-danger btn-sm">
+            <i class="bi bi-arrow-right-circle"></i> Xem tất cả
+        </a>
+    </div>
+
+    <div class="row g-3" id="suggestionsListContainer">
+        @if (Model != null && Model.Any())
+        {
+            // Lấy 6 cuốn sách đầu tiên từ Model để làm Gợi ý
+            @foreach (var item in Model.Take(6))
+            {
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="card h-100 shadow-sm">
+                        <!-- Sử dụng class .suggestion-book-img cho ảnh bìa phần Gợi ý (chiều cao 250px) -->
+                        <img src="@(string.IsNullOrEmpty(item.ImageUrl) ? "~/images/books/book_placeholder.png" : item.ImageUrl)"
+                             class="card-img-top suggestion-book-img" alt="@item.Title">
+
+                        <div class="card-body d-flex flex-column p-2">
+                            <h5 class="card-title" style="font-size: 0.9rem; min-height: 40px;">@item.Title</h5>
+                            <p class="card-text text-muted" style="font-size: 0.8rem;">@item.Author</p>
+                            <p class="card-text text-danger"><strong>@item.Price.ToString("N0") VNĐ</strong></p>
+
+                            <form asp-controller="Cart" asp-action="AddToCart" method="post" class="mt-auto">
+                                <input type="hidden" name="id" value="@item.Id" />
+                                <button type="submit" class="btn btn-primary btn-sm w-100">
+                                    <i class="bi bi-cart-plus"></i> Thêm vào giỏ
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p class="text-center">Chưa có sách gợi ý.</p>
+        }
+    </div>
+</div>
+<!-- === KẾT THÚC PHẦN GỢI Ý HÔM NAY === -->
+<!-- === PHẦN: CÓ THỂ BẠN CŨNG THÍCH (LAYOUT LƯỚI 6 CỘT) === -->
+<div class="container mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="text-uppercase fw-bold text-danger mb-0">CÓ THỂ BẠN CŨNG THÍCH</h4>
+        <a href="#" class="btn btn-outline-danger btn-sm">
+            <i class="bi bi-arrow-right-circle"></i> Xem tất cả
+        </a>
+    </div>
+
+    <div class="row g-3" id="mayLikeListContainer">
+        @if (Model != null && Model.Skip(6).Any())
+        {
+            // Lấy 6 cuốn sách tiếp theo từ Model (sau 6 cuốn gợi ý)
+            @foreach (var item in Model.Skip(6).Take(6))
+            {
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="card h-100 shadow-sm">
+                        <!-- Vẫn dùng class .suggestion-book-img (chiều cao 250px) -->
+                        <img src="@(string.IsNullOrEmpty(item.ImageUrl) ? "~/images/books/book_placeholder.jpg" : item.ImageUrl)"
+                             class="card-img-top suggestion-book-img" alt="@item.Title">
+
+                        <div class="card-body d-flex flex-column p-2">
+                            <h5 class="card-title" style="font-size: 0.9rem; min-height: 40px;">@item.Title</h5>
+                            <p class="card-text text-muted" style="font-size: 0.8rem;">@item.Author</p>
+                            <p class="card-text text-danger"><strong>@item.Price.ToString("N0") VNĐ</strong></p>
+
+                            <form asp-controller="Cart" asp-action="AddToCart" method="post" class="mt-auto">
+                                <input type="hidden" name="id" value="@item.Id" />
+                                <button type="submit" class="btn btn-primary btn-sm w-100">
+                                    <i class="bi bi-cart-plus"></i> Thêm vào giỏ
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else if (Model != null && Model.Count() <= 6)
+        {
+            <p class="text-center">Vui lòng thêm sách vào database để hiển thị mục này.</p>
+        }
+    </div>
+</div>
+<!-- === KẾT THÚC PHẦN CÓ THỂ BẠN CŨNG THÍCH === -->
+<!-- === PHẦN MỚI THÊM: SẢN PHẨM PHỔ BIẾN (LAYOUT LƯỚI 6 CỘT) === -->
+<div class="container mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="text-uppercase fw-bold text-danger mb-0">SẢN PHẨM PHỔ BIẾN</h4>
+        <a href="#" class="btn btn-outline-danger btn-sm">
+            <i class="bi bi-arrow-right-circle"></i> Xem tất cả
+        </a>
+    </div>
+
+    <div class="row g-3" id="popularListContainer">
+        @if (Model != null && Model.Skip(12).Any())
+        {
+            // Lấy 6 cuốn sách tiếp theo từ Model (tức là từ cuốn thứ 13 đến 18)
+            @foreach (var item in Model.Skip(12).Take(6))
+            {
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="card h-100 shadow-sm">
+                        <!-- Vẫn dùng class .suggestion-book-img (chiều cao 250px) -->
+                        <img src="@(string.IsNullOrEmpty(item.ImageUrl) ? "~/images/books/book_placeholder.j" : item.ImageUrl)"
+                             class="card-img-top suggestion-book-img" alt="@item.Title">
+
+                        <div class="card-body d-flex flex-column p-2">
+                            <h5 class="card-title" style="font-size: 0.9rem; min-height: 40px;">@item.Title</h5>
+                            <p class="card-text text-muted" style="font-size: 0.8rem;">@item.Author</p>
+                            <p class="card-text text-danger"><strong>@item.Price.ToString("N0") VNĐ</strong></p>
+
+                            <form asp-controller="Cart" asp-action="AddToCart" method="post" class="mt-auto">
+                                <input type="hidden" name="id" value="@item.Id" />
+                                <button type="submit" class="btn btn-primary btn-sm w-100">
+                                    <i class="bi bi-cart-plus"></i> Thêm vào giỏ
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else if (Model != null && Model.Count() <= 12)
+        {
+            <p class="text-center">Vui lòng thêm sách vào database (cần ít nhất 13 cuốn) để hiển thị mục này.</p>
+        }
+    </div>
+</div>
+<!-- === KẾT THÚC PHẦN SẢN PHẨM PHỔ BIẾN === -->
+<!-- Vùng hiển thị sách (Cuộn ngang) -->
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center bg-light p-2 mt-4 rounded-top">
+        <h4 class="text-danger mb-0">SÁCH MỚI CẬP NHẬT</h4>
+        <a asp-action="Index" asp-route-page="1" class="btn btn-outline-danger btn-sm">
+            <i class="bi bi-arrow-right-circle"></i> Xem tất cả
+        </a>
+    </div>
+
+    <!-- Thanh tìm kiếm vẫn giữ nguyên -->
+    <div class="mb-3 p-3 border-start border-end border-bottom">
+        <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm sách trong danh mục này (AJAX)...">
+    </div>
+
+    <!-- Danh sách cuộn ngang -->
+    <div class="horizontal-book-list" id="bookListContainer">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <div class="book-list-item">
+                    <div class="card h-100 shadow-sm">
+                        <!-- Sử dụng class .book-card-img cho ảnh bìa phần cuộn ngang (chiều cao 300px) -->
+                        <img src="@(string.IsNullOrEmpty(item.ImageUrl) ? "~/images/books/book_placeholder.j" : item.ImageUrl)"
+                             class="card-img-top book-card-img" alt="@item.Title">
+
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title" style="font-size: 1rem;">@item.Title</h5>
+                            <p class="card-text text-muted" style="font-size: 0.9rem;">@item.Author</p>
+                            <p class="card-text text-danger"><strong>@item.Price.ToString("N0") VNĐ</strong></p>
+
+                            <form asp-controller="Cart" asp-action="AddToCart" method="post" class="mt-auto">
+                                <input type="hidden" name="id" value="@item.Id" />
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="bi bi-cart-plus"></i> Thêm vào giỏ
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div> <!-- Đóng horizontal-book-list -->
+
+    @if (Model == null || !Model.Any())
+    {
+        <p class="text-center">
+            Không tìm thấy sách nào. (Hãy vào trang
+            <a asp-controller="Admin" asp-action="Index">
+                <i class="bi bi-gear-fill"></i> Quản lý
+            </a>
+            để thêm sách mới).
+        </p>
+    }
+
+
+    <!-- Vùng phân trang (Sử dụng ViewData từ Controller) -->
+    @if (totalPages > 1)
+    {
+        <div class="row mt-5">
+            <div class="col-12 d-flex justify-content-center">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        @if (currentPage > 1)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" asp-action="Index" asp-route-page="@(currentPage - 1)">Trang trước</a>
+                            </li>
+                        }
+
+                        @for (int i = 1; i <= totalPages; i++)
+                        {
+                            <li class="page-item @(i == currentPage ? "active" : "")">
+                                <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                            </li>
+                        }
+
+                        @if (currentPage < totalPages)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" asp-action="Index" asp-route-page="@(currentPage + 1)">Trang sau</a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>// Code JQuery AJAX của bạn để tìm kiếm
+                    // ...</script>
+}

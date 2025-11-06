@@ -1,0 +1,118 @@
+﻿@model IEnumerable<WebBanSach.Models.Book>
+@{
+    ViewData["Title"] = "Trang Admin";
+    // Chúng ta vẫn dùng layout chung
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Lấy danh sách Categories từ ViewBag đã được truyền từ AdminController
+    var categories = ViewBag.Categories as List<WebBanSach.Models.Category>;
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="display-4">Trang Quản Trị</h1>
+        <div>
+            <a class="btn btn-primary" asp-controller="Admin" asp-action="ManageUsers">
+                Quản lý Người dùng
+            </a>
+            <a class="btn btn-info" asp-controller="Admin" asp-action="ManageOrders">
+                Quản lý Đơn hàng &raquo;
+            </a>
+        </div>
+    </div>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Thêm sản phẩm mới</h3>
+
+            <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+            <form asp-controller="Admin" asp-action="AddBook" method="post" enctype="multipart/form-data">
+
+                <div class="mb-3">
+                    <label class="form-label">Tên sách</label>
+                    <input name="Title" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Tác giả</label>
+                    <input name="Author" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Danh mục</label>
+                    <select name="CategoryId" class="form-control" required>
+                        @if (categories != null)
+                        {
+                            @foreach (var category in categories)
+                            {
+                                <option value="@category.Id">@category.Name</option>
+                            }
+                        }
+                        else
+                        {
+                            <option value="">(Không có danh mục)</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Giá (VND)</label>
+                    <input name="Price" type="number" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Tải lên Ảnh bìa</label>
+                    <input name="ImageFile" type="file" class="form-control" accept="image/*" />
+                    <small class="form-text text-muted">Ảnh bìa sẽ được tải lên và lưu.</small>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Link ảnh (URL) - Tùy chọn</label>
+                    <input name="ImageUrl" type="text" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Mô tả</label>
+                    <textarea name="Description" class="form-control" rows="3"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Thêm mới</button>
+            </form>
+        </div>
+    </div>
+
+    <hr class="my-5" />
+
+    <h3>Danh sách sản phẩm hiện tại</h3>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Tên sách</th>
+                <th>Tác giả</th>
+                <th>Giá</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model)
+            {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                    <td>@book.Price.ToString("N0") đ</td>
+                    <td>
+
+                        <form asp-controller="Admin" asp-action="DeleteBook" method="post"
+                              onsubmit="return confirm('Bạn có chắc muốn xóa sách này?');">
+                            <input type="hidden" name="id" value="@book.Id" />
+                            <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

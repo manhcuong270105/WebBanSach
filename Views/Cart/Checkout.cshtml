@@ -1,0 +1,49 @@
+﻿@model WebBanSach.Models.Order
+@{
+    ViewData["Title"] = "Thanh toán";
+}
+
+<h2>Thông tin Thanh toán</h2>
+<p>Vui lòng điền thông tin để hoàn tất đơn hàng (thanh toán khi nhận hàng - COD).</p>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Checkout" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="CustomerName" class="form-label">Họ và Tên</label>
+                <input asp-for="CustomerName" class="form-control" />
+                <span asp-validation-for="CustomerName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Address" class="form-label">Địa chỉ nhận hàng</label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Phone" class="form-label">Số điện thoại</label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label">Email</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success">Xác nhận Đặt hàng</button>
+        </form>
+    </div>
+    <div class="col-md-4 offset-md-2">
+        <h4>Đơn hàng của bạn</h4>
+        <p><em>(Bạn có thể hiển thị tóm tắt đơn hàng ở đây nếu muốn)</em></p>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

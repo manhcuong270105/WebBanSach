@@ -1,0 +1,117 @@
+﻿@using Microsoft.AspNetCore.Http
+<!-- THÊM DÒNG NÀY để View có thể đọc Session -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebBanSach</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- === BƯỚC 1: THÊM LINK BOOTSTRAP ICONS === -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- ======================================= -->
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebBanSach.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <strong>WebBanSach</strong>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse">
+                    <form class="d-flex w-50 mx-auto" asp-controller="Home" asp-action="Search" method="get">
+                        <input class="form-control me-2"
+                               type="search"
+                               placeholder="Tìm kiếm sách..."
+                               aria-label="Search"
+                               name="query" required> <button class="btn btn-outline-danger" type="submit">
+                            <i class="bi bi-search"></i> Tìm
+                        </button>
+                    </form>
+                    ...
+
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">
+                                <i class="bi bi-bell"></i> Thông báo
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Cart" asp-action="Index">
+                                <i class="bi bi-cart"></i> Giỏ hàng
+                            </a>
+                        </li>
+
+                        <!-- =========================================== -->
+                        <!-- === CODE MỚI THÊM VÀO (BƯỚC 2) === -->
+                        <!-- === Thay thế cho "Tài khoản" và "Quản lý" === -->
+                        <!-- =========================================== -->
+                        @if (Context.Session.GetString("Username") == null)
+                        {
+                            // NẾU CHƯA ĐĂNG NHẬP
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">
+                                    <i class="bi bi-person-circle"></i> Tài khoản
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <!-- === BƯỚC 2: THÊM ICON ĐĂNG KÝ === -->
+                                <a class="nav-link text-primary" asp-controller="Account" asp-action="Register">
+                                    <i class="bi bi-person-plus-fill"></i> Đăng ký
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            // NẾU ĐÃ ĐĂNG NHẬP
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="#">
+                                    <i class="bi bi-person-circle"></i>
+                                    Chào, @Context.Session.GetString("Username")
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <!-- === BƯỚC 2: THÊM ICON ĐĂNG XUẤT === -->
+                                <a class="nav-link text-primary" asp-controller="Account" asp-action="Logout">
+                                    <i class="bi bi-box-arrow-right"></i> Đăng xuất
+                                </a>
+                            </li>
+                        }
+                        <!-- =========================================== -->
+                        <!-- === KẾT THÚC CODE MỚI === -->
+                        <!-- =========================================== -->
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - WebBanSach - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

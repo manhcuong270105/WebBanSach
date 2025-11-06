@@ -1,0 +1,303 @@
+﻿html {
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .form-control:focus {
+    box-shadow: none;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+/* =========================================== */
+/* === Các lớp kiểm soát kích thước ảnh === */
+/* =========================================== */
+
+/* 1. Dành cho 2 banner lớn trong Carousel */
+.carousel-banner-img {
+    width: 100%;
+    height: 400px; /* Chiều cao cố định cho banner */
+    min-height: 400px; /* === THÊM DÒNG NÀY ĐỂ ĐẢM BẢO CHIỀU CAO === */
+    object-fit: cover; /* Đảm bảo ảnh lấp đầy mà không bị méo */
+    border-radius: 8px;
+}
+
+/* === BỔ SUNG ĐỂ SỬA LỖI JUMP/NHÁY HÌNH === */
+/* Đặt chiều cao cố định cho CHÍNH SLIDE (item) bên trong carousel */
+#heroCarousel .carousel-item {
+    height: 400px;
+    min-height: 400px;
+    /* Thêm màu nền giữ chỗ nhẹ (để không bị trắng) */
+    background-color: #f0f0f0;
+}
+/* === KẾT THÚC BỔ SUNG === */
+
+/* 2. Dành cho 2 ảnh quảng cáo ở cột bên */
+.sidebar-ad-img {
+    width: 100%;
+    height: 195px; /* Chiều cao cố định cho quảng cáo */
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* 3. Dành cho các icon danh mục (Sale, Manga...) */
+.category-icon-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%; /* Bo tròn */
+}
+
+/* 4. Dành cho ảnh bìa sách trên thẻ (card) */
+/* === THAY ĐỔI: Giảm chiều cao ảnh bìa sách cho phù hợp với layout mới === */
+.book-card-img {
+    width: 100%;
+    height: 300px; /* Chiều cao cố định cho ảnh bìa sách (giảm từ 350px) */
+    object-fit: cover;
+}
+
+/* 5. Dành cho icon thương hiệu */
+.brand-icon-img {
+    width: 100px; /* Kích thước lớn hơn icon danh mục */
+    height: 100px;
+    object-fit: contain; /* 'contain' để logo không bị cắt */
+    border-radius: 50%;
+    border: 1px solid #eee; /* Viền xám nhạt */
+    padding: 5px; /* Thêm chút đệm để logo dễ thở */
+    transition: transform .2s, box-shadow .2s;
+}
+
+.brand-icon-grid a:hover .brand-icon-img {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* =========================================== */
+/* === CSS MỚI: Danh sách sách cuộn ngang === */
+/* =========================================== */
+.horizontal-book-list {
+    display: flex; /* Kích hoạt Flexbox */
+    overflow-x: auto; /* Cho phép cuộn ngang */
+    white-space: nowrap; /* Ngăn các item xuống dòng */
+    padding: 10px 0 20px 0; /* Thêm đệm cho thanh cuộn */
+    /* Ẩn thanh cuộn (cho trình duyệt Webkit như Chrome, Safari) */
+}
+
+    .horizontal-book-list::-webkit-scrollbar {
+        display: none; /* Ẩn thanh cuộn */
+    }
+
+.book-list-item {
+    width: 250px; /* Chiều rộng cố định cho mỗi cuốn sách */
+    flex-shrink: 0; /* Ngăn item bị co lại */
+    margin-right: 16px; /* Khoảng cách giữa các cuốn sách */
+}
+    /* Đảm bảo card bên trong co giãn 100% chiều cao */
+    .book-list-item .card {
+        height: 100%;
+    }
+
+
+/* =========================================== */
+/* === CODE CSS MỚI BẠN VỪA CUNG CẤP === */
+/* =========================================== */
+
+/* ... (Phần còn lại của file site.css của bạn) ... */
+
+/* Làm cho card sản phẩm đẹp hơn */
+.card {
+    transition: box-shadow .3s ease-in-out, transform .3s ease-in-out;
+    border: none; /* Bỏ viền card */
+}
+
+    .card:hover {
+        transform: translateY(-5px); /* Nhấc card lên khi hover */
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1) !important;
+    }
+
+/* Tùy chỉnh thanh header */
+.navbar .nav-link {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.navbar .navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #DC3545; /* Màu đỏ chủ đạo */
+}
+
+/* Tùy chỉnh icon danh mục */
+.category-icon-grid img {
+    border: 1px solid #eee;
+    transition: transform .2s;
+}
+
+.category-icon-grid a:hover img {
+    transform: scale(1.1);
+}
+
+/* === CSS TRANG LOGIN (v2) === */
+.login-page-container {
+    color: #fff; /* Chữ màu trắng */
+    display: flex;
+    justify-content: center;
+    /* Thay vì 'align-items: center;' (căn giữa),
+       chúng ta dùng 'flex-start' để đẩy nó lên trên.
+    */
+    align-items: flex-start;
+    /* Thêm padding-top để nó không dính vào header */
+    padding: 80px 20px 50px 20px;
+    min-height: 90vh; /* Đảm bảo nó chiếm chiều cao */
+}
+
+.login-form-wrapper {
+    background-color: rgba(0, 0, 0, 0.75); /* Nền đen trong suốt 75% */
+    /* Tăng padding để bên trong rộng rãi hơn */
+    padding: 50px;
+    border-radius: 10px;
+    /* ĐÂY LÀ THAY ĐỔI QUAN TRỌNG:
+       Tăng max-width để form rộng hơn, giống ảnh mẫu.
+    */
+    max-width: 650px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Đổ bóng */
+}
+
+.login-title {
+    color: #fff;
+    margin-bottom: 30px; /* Tăng khoảng cách dưới tiêu đề */
+    font-size: 2em;
+    text-align: left; /* Đổi về căn trái như ảnh mẫu */
+    font-weight: 600;
+}
+
+/* Tùy chỉnh input của Bootstrap */
+.login-input {
+    background-color: #333; /* Nền input màu tối */
+    color: #fff !important; /* Chữ nhập vào màu trắng */
+    border: 1px solid #555; /* Viền input */
+    /* Tăng chiều cao input */
+    padding: 18px 15px;
+    border-radius: 5px;
+    font-size: 1.1em;
+}
+
+    /* Xóa viền xanh (box-shadow) khi focus */
+    .login-input:focus {
+        background-color: #333;
+        border-color: #8B4513; /* Màu viền nâu khi focus */
+        box-shadow: none;
+    }
+
+/* Tùy chỉnh label của Bootstrap */
+.login-label {
+    color: #bbb; /* Màu chữ của label */
+}
+
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label {
+    color: #fff;
+}
+
+
+/* Tùy chỉnh Checkbox */
+.checkbox-wrapper {
+    text-align: left;
+    color: #ccc;
+    font-size: 0.9em;
+    margin-top: 20px; /* Thêm khoảng cách trên checkbox */
+}
+
+    .checkbox-wrapper .form-check-input {
+        background-color: #333;
+        border-color: #555;
+    }
+
+        .checkbox-wrapper .form-check-input:checked {
+            background-color: #8B4513; /* Màu nâu khi check */
+            border-color: #8B4513;
+        }
+
+/* Nút "Sign In" */
+.login-button {
+    background-color: #8B4513; /* Màu nâu đất */
+    border-color: #8B4513;
+    color: #fff;
+    padding: 12px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 25px; /* Tăng khoảng cách trên nút */
+}
+
+    .login-button:hover {
+        background-color: #A0522D; /* Màu nâu nhạt hơn khi hover */
+        border-color: #A0522D;
+        color: #fff;
+    }
+
+/* Các link phụ */
+.links-section {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.forgot-link {
+    color: #A0522D; /* Màu nâu cho link */
+    text-decoration: none;
+    font-size: 0.9em;
+    display: block; /* Hiển thị mỗi link 1 dòng */
+    margin-bottom: 5px;
+}
+
+    .forgot-link:hover {
+        text-decoration: underline;
+        color: #CD853F;
+    }
+
+/* Phần "Join Now" */
+.join-coffee-house-section {
+    margin-top: 40px; /* Tăng khoảng cách */
+    padding-top: 30px;
+    border-top: 1px solid #444; /* Đường kẻ ngang */
+    color: #ccc; /* Chữ mô tả màu xám nhạt */
+    text-align: center; /* Căn giữa như ảnh mẫu */
+}
+
+    .join-coffee-house-section p {
+        font-size: 1em;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+
+.join-now-button {
+    background-color: transparent; /* Nền trong suốt */
+    border: 2px solid #8B4513; /* Viền màu nâu */
+    color: #8B4513; /* Chữ màu nâu */
+    padding: 10px 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+    .join-now-button:hover {
+        background-color: #8B4513; /* Đổi nền thành nâu khi hover */
+        color: #fff; /* Chữ đổi thành trắng */
+        border-color: #8B4513;
+    }
+
+/* Thông báo lỗi validation (ghi đè nhẹ) */
+.text-danger {
+    font-size: 0.85em;
+    text-align: left;
+}

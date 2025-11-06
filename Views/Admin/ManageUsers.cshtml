@@ -1,0 +1,62 @@
+﻿@model IEnumerable<WebBanSach.Models.User>
+@{
+    ViewData["Title"] = "Quản lý Người dùng";
+    // Chúng ta dùng chung _Layout (đã bao gồm header/footer)
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="display-5">@ViewData["Title"]</h2>
+        <div>
+            <a asp-action="Index" class="btn btn-secondary">
+                &laquo; Quản lý Sách
+            </a>
+            <a asp-action="ManageOrders" class="btn btn-info">
+                Quản lý Đơn hàng &raquo;
+            </a>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">Tổng số người dùng: @Model.Count()</h5>
+
+            <table class="table table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Email (Tên đăng nhập)</th>
+                        <th>Vai trò (Role)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="3" class="text-center text-muted">Chưa có người dùng nào đăng ký.</td>
+                        </tr>
+                    }
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.Id</td>
+                            <td>@user.Email</td>
+                            <td>
+                                @if (user.Role == "Admin")
+                                {
+                                    <span class="badge bg-danger">@user.Role</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">@user.Role</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

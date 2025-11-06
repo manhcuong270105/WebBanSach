@@ -1,0 +1,46 @@
+﻿<Properties StartupConfiguration="{1EE288B3-3C81-4167-A9F2-7337086A825F}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/AdminController.cs">
+    <Files>
+      <File FileName="Program.cs" />
+      <File FileName="Migrations/20251102112532_SeedData.cs" Line="72" Column="2" />
+      <File FileName="Controllers/AdminController.cs" Line="23" Column="1" />
+      <File FileName="Views/Admin/Index.cshtml" Line="1" Column="1" />
+      <File FileName="Views/Home/Index.cshtml" />
+      <File FileName="Migrations/20251102112122_SeedBooks.cs" Line="1" Column="1" />
+      <File FileName="Migrations/20251102015614_AddOrderTables.cs" Line="1" Column="1" />
+      <File FileName="Migrations/20251101185258_AddUserTable.cs" Line="1" Column="1" />
+      <File FileName="Migrations/20251101145226_InitialCreate.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="WebBanSach" expanded="True">
+            <Node name="WebBanSach" expanded="True">
+              <Node name="Controllers" expanded="True">
+                <Node name="AdminController.cs" selected="True" />
+              </Node>
+              <Node name="Migrations" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Account" expanded="True" />
+                <Node name="Admin" expanded="True" />
+                <Node name="Home" expanded="True" />
+              </Node>
+              <Node name="wwwroot" expanded="True">
+                <Node name="images" expanded="True">
+                  <Node name="books" expanded="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.WebBanSach PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+</Properties>
